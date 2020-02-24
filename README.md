@@ -157,8 +157,12 @@ if USER_ASSIGNED_IDENTITY and SYSTEM_ASSIGNED_IDENTITY:
     ]
 elif USER_ASSIGNED_IDENTITY: # User Assigned only
     params_identity['type'] = ResourceIdentityType.user_assigned
-    params_identity['identity_ids'] = [
-        user_assigned_identity.id
+    params_identity['user_assigned_identities'] = [
+        "key": user_assigned_identity.id,
+        "value": {
+            "principal_id": user_assigned_identity.principal_id,
+            "client_id": user_assigned_identity.id
+        }
     ]
 elif SYSTEM_ASSIGNED_IDENTITY: # System assigned only
     params_identity['type'] = ResourceIdentityType.system_assigned
